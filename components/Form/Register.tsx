@@ -2,6 +2,7 @@ import { Tabs, TextInput } from '@mantine/core'
 import {useForm} from '@mantine/form'
 import { useState } from 'react'
 import WorkerForm from './WorkerForm'
+import RecruiterForm from './RecruiterForm'
 function RegisterForm() {
 
 
@@ -16,7 +17,9 @@ function RegisterForm() {
             <Tabs.Panel value='worker' pt="xs">
                 <WorkerForm/>
             </Tabs.Panel>
-            <Tabs.Panel value='recruiter' pt="xs">Recruiter</Tabs.Panel>
+            <Tabs.Panel value='recruiter' pt="xs">
+              <RecruiterForm />
+            </Tabs.Panel>
         </Tabs>
     </>
   )

@@ -1,5 +1,7 @@
+import { prisma } from "@/lib/prisma";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
+import bcrypt from "bcryptjs"
 
 
 interface UserCredentials {
@@ -18,22 +20,21 @@ export const authOptions: NextAuthOptions = {
             authorize: async (credentials: UserCredentials, req) => {
                 const { email, password } = credentials
                 try {
-                    const response = await fetch(`http://localhost:5000/users?email=${email}`)
-                    if (!response.ok) {
-                        throw new Error("Error fetching user data")
-                    }
+                    const user = await prisma.user.findUnique({
+                        where: { email }
+                    })
 
-                    const userData = await response.json()
-                    if (userData && userData.length > 0 && userData[0].password === password) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
                         return {
-                            id: userData[0].id,
-                            name: userData[0].name,
-                            photo: userData[0].photo,
-                            roles: userData[0].roles,
+                            id: user.id,
+                            name: user.name,
+                            role: user.role,
+                            photo: user.photo
                         }
                     } else {
                         return null
                     }
+                    
                 } catch (error) {
                     console.error("Error fetching user data: ", error)
                     return null;
@@ -54,7 +55,7 @@ export const authOptions: NextAuthOptions = {
                     ...session.user,
                     id: token.id,
                     photo: token.photo,
-                    roles: token.roles,
+                    roles: token.role,
                 },
             };
         },
@@ -62,8 +63,8 @@ export const authOptions: NextAuthOptions = {
             // console.log("JWT CALLBACK: ", { token, user })
             if (user) {
                 token.id = user.id
+                token.role = user.role
                 token.photo = user.photo
-                token.roles = user.roles
             }
             return token
         }
