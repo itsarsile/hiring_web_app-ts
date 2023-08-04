@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               Int               @id @default(autoincrement())
+  name             String
+  phone            String?
+  email            String            @unique
+  photo            String?
+  password         String
+  bio              String?
+  role             UserRoles
+  recruiterProfile RecruiterProfile?
+  workerProfile    WorkerProfile?
+
+  portfolios  UserPortfolio[]
+  experiences UserExperience[]
+}
+
+model RecruiterProfile {
+  userId         Int       @id
+  user           User      @relation(fields: [userId], references: [id])
+  companyName    String?
+  companyEmail   String?
+  companyPhone   String?
+  companySegment String?
+  companyInfo    String?
+  province       Province? @relation(fields: [provinceId], references: [id])
+  provinceId     Int?
+}
+
+model Province {
+  id               Int                @id @default(autoincrement())
+  name             String
+  cities           City[]
+  RecruiterProfile RecruiterProfile[]
+  WorkerProfile    WorkerProfile[]
+}
+
+model City {
+  id         Int      @id @default(autoincrement())
+  name       String
+  province   Province @relation(fields: [provinceId], references: [id])
+  provinceId Int
+}
+
+model WorkerProfile {
+  userId Int  @id
+  user   User @relation(fields: [userId], references: [id])
+
+  province   Province? @relation(fields: [provinceId], references: [id])
+  provinceId Int?
+}
+
+model Experience {
+  id          Int      @id @default(autoincrement())
+  position    String
+  companyName String
+  description String
+  startAt     DateTime
+  endedAt     DateTime
+  createdAt   DateTime @default(now())
+
+  users UserExperience[]
+}
+
+model Portfolio {
+  id        Int      @id @default(autoincrement())
+  link      String
+  types     String
+  photo     String
+  createdAt DateTime @default(now())
+
+  users UserPortfolio[]
+}
+
+model UserExperience {
+  userId       Int
+  experienceId Int
+
+  user       User       @relation(fields: [userId], references: [id])
+  experience Experience @relation(fields: [experienceId], references: [id])
+
+  @@id([userId, experienceId])
+}
+
+model UserPortfolio {
+  userId      Int
+  portfolioId Int
+
+  user      User      @relation(fields: [userId], references: [id])
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+
+  @@id([userId, portfolioId])
+}
+
+enum UserRoles {
+  ADMIN
+  RECRUITER
+  WORKER
+}
