@@ -2,6 +2,11 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 
 
+interface UserCredentials {
+    email: string;
+    password: string;
+}
+
 export const authOptions: NextAuthOptions = {
     session: {
         strategy: 'jwt'
@@ -10,7 +15,7 @@ export const authOptions: NextAuthOptions = {
         CredentialsProvider({
             type: "credentials",
             credentials: {},
-            authorize: async (credentials, req) => {
+            authorize: async (credentials: UserCredentials, req) => {
                 const { email, password } = credentials
                 try {
                     const response = await fetch(`http://localhost:5000/users?email=${email}`)
