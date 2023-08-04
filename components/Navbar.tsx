@@ -10,6 +10,7 @@ export default function Navbar() {
       router.push("/")
   }
   const { data: session, status } = useSession();
+  console.log(session)
   return (
     <div className="navbar">
       <div className="navbar-start">

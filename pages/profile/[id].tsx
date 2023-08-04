@@ -1,9 +1,17 @@
-import Layout from "@/components/layout";
-import Image from "next/image";
-import Link from "next/link";
-import { BsInstagram, BsEnvelope, BsGithub } from "react-icons/bs";
+import Layout from "@/components/Layout";
+import UserBasicInfo from "./UserBasicInfo";
+import { GetServerSideProps } from "next";
+import axios from "axios";
 
-export default function ProfilePage({ userInfo, portfolioInfo, workExperienceInfo }) {
+type User = {
+  name: string
+  photo: string
+}
+
+
+
+export default function ProfilePage({ user }: any) {
+   
   return (
     <Layout>
       <div className="my-10">
@@ -12,7 +20,7 @@ export default function ProfilePage({ userInfo, portfolioInfo, workExperienceInf
             <div className="flex flex-col gap-5">
               <div className="card w-80 bg-white shadow-lg bordered">
                 <div className="card-body justify-center items-center">
-                  <div className="avatar w-24">
+                  {/* <div className="avatar w-24">
                     <Image
                       src={userInfo.photo}
                       width={110}
@@ -20,8 +28,9 @@ export default function ProfilePage({ userInfo, portfolioInfo, workExperienceInf
                       alt="avatar"
                       className="rounded-full"
                     />
-                  </div>
-                  <div className="flex flex-col space-y-2 mt-2 w-full text-center lg:text-left">
+                  </div> */}
+                  <UserBasicInfo user={user}/>
+                  {/* <div className="flex flex-col space-y-2 mt-2 w-full text-center lg:text-left">
                     <h1 className="font-bold">{userInfo.name}</h1>
                     <p className="text-slate-400 text-sm">{userInfo.domicile}</p>
                     <p className="flex items text-sm gap-2 text-slate-400 lg:justify-start justify-center">
@@ -52,9 +61,9 @@ export default function ProfilePage({ userInfo, portfolioInfo, workExperienceInf
                     <p className="text-slate-400 text-sm mt-2">
                       {userInfo.bio}
                     </p>
-                  </div>
+                  </div> */}
                 </div>
-                <div className="card-body gap-5">
+                {/* <div className="card-body gap-5">
                   <div className="card-title">Skill</div>
                   <div className="flex gap-2 flex-nowrap">
                   {userInfo.skills.map((skill) => (
@@ -77,12 +86,12 @@ export default function ProfilePage({ userInfo, portfolioInfo, workExperienceInf
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="flex flex-col gap-5 col-span-2 w-full h-full">
               {/* Portfolio */}
-              <div className="card w-80 mx-auto mt-10 lg:mt-0 lg:w-full bg-white shadow-lg bordered">
+              {/* <div className="card w-80 mx-auto mt-10 lg:mt-0 lg:w-full bg-white shadow-lg bordered">
                 <div className="card-body">
                   <div className="card-title text-lg lg:text-2xl font-bold ">
                     Portofolio
@@ -121,7 +130,7 @@ export default function ProfilePage({ userInfo, portfolioInfo, workExperienceInf
                   </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -130,34 +139,23 @@ export default function ProfilePage({ userInfo, portfolioInfo, workExperienceInf
   );
 }
 
-export async function getServerSideProps({ params }) {
-  const { id } = params;
 
-  try {
-    const [userResponse, portfolioResponse, workExperienceResponse] =
-      await Promise.all([
-        fetch(`http://localhost:5000/users/${id}`),
-        fetch(`http://localhost:5000/users/${id}/portfolio`),
-        fetch(`http://localhost:5000/users/${id}/workExperience`),
-      ]);
-
-    const userInfo = await userResponse.json();
-    const portfolioInfo = await portfolioResponse.json();
-    const workExperienceInfo = await workExperienceResponse.json();
-    console.log(userInfo.socialMediaAccounts)
-    delete userInfo.password;
-
-    return {
-      props: {
-        userInfo,
-        portfolioInfo,
-        workExperienceInfo,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching user data: ", error);
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  if (!params || typeof params.id !== "string") {
     return {
       notFound: true,
     };
   }
-}
+  const { id } = params;
+  console.log(id)
+  const userData = await fetch(`http://localhost:3000/api/users/${id}`)
+  const user = await userData.json();
+  console.log(user)
+  return {
+    props: {
+      user,
+    },
+  };
+};
+
+

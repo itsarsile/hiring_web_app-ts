@@ -1,13 +1,17 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { createRouter, expressWrapper } from 'next-connect'
 
-type Data = {
-  name: string
-}
+const router = createRouter<NextApiRequest, NextApiResponse>();
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  res.status(200).json({ name: 'John Doe' })
-}
+router
+.get((req, res) => {
+  return res.status(200).json({ message: 'Hello!' })
+})
+
+export default router.handler({
+  onError: (err: any, req, res) => {
+    console.error(err.stack);
+    res.status(err.statusCode || 500).end(err.message);
+  },
+});

@@ -1,63 +1,16 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Layout from "@/components/layout";
+import Layout from "@/components/Layout";
 import SearchBar from "@/components/SearchBar";
 import { useRouter } from "next/router";
+import UserCards from "./UserCards";
 
-const PAGE_SIZE = 5;
 
-export default function Home({ users, currentPage, totalUsers }) {
+
+export default function Home() {
   const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchFilter, setSearchFilter] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState(users);
 
-  const handleSearch = (query, filter) => {
-    setSearchQuery(query);
-    setSearchFilter(filter);
-  };
-
-  useEffect(() => {
-    const filteredUsers = users.filter((user) => {
-      const nameIncludesQuery = user.name
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
-      if (searchFilter === "name") return nameIncludesQuery;
-
-      if (searchFilter === "skill") {
-        return user.skills.some((skill) =>
-          skill.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      }
-
-      if (searchFilter === "location") {
-        return user.domicile.toLowerCase().includes(searchQuery.toLowerCase());
-      }
-
-      if (searchFilter === "freelance") {
-        return user.jobDesk.toLowerCase() === "freelancer";
-      }
-
-      if (searchFilter === "fulltime") {
-        return user.jobDesk.toLowerCase() === "fulltime";
-      }
-
-      return nameIncludesQuery;
-    });
-
-    setFilteredUsers(filteredUsers);
-  }, [searchQuery, searchFilter, users]);
-
-  const handlePagination = (page) => {
-    const nextPageStartIndex = (page - 1) * PAGE_SIZE;
-    const nextPageEndIndex = nextPageStartIndex + PAGE_SIZE;
-    const nextPageHasData =
-      nextPageStartIndex < totalUsers && nextPageEndIndex <= totalUsers;
-    if (nextPageHasData) {
-      router.push(`/home?page=${page}`);
-    }
-  };
 
   return (
     <Layout>
@@ -68,17 +21,12 @@ export default function Home({ users, currentPage, totalUsers }) {
       </div>
       <div className="max-w-6xl mx-auto mt-10">
         {/* Search Bar */}
-        <SearchBar
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          searchFilter={searchFilter}
-          setSearchFilter={setSearchFilter}
-          onSearch={handleSearch}
-        />
+
         <div className="my-10">
           <div className="flex flex-col rounded-lg shadow-xl">
             {/* People Cards */}
-            {filteredUsers.map((user) => (
+            <UserCards />
+            {/* {filteredUsers.map((user) => (
               <div
                 key={user.id}
                 className="flex flex-col lg:flex-row p-10 items-center justify-between bordered"
@@ -133,13 +81,13 @@ export default function Home({ users, currentPage, totalUsers }) {
                   </button>
                 </div>
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center my-5 text-white">
+      {/* <div className="flex justify-center my-5 text-white">
         <div className="join">
           {currentPage > 1 && (
             <button
@@ -159,35 +107,35 @@ export default function Home({ users, currentPage, totalUsers }) {
             </button>
           )}
         </div>
-      </div>
+      </div> */}
     </Layout>
   );
 }
 
-export async function getServerSideProps({ query }) {
-  const page = parseInt(query.page) || 1;
-  try {
-    const totalUsersResponse = await fetch("http://localhost:5000/users");
-    const totalUsers = await totalUsersResponse.json();
+// export async function getServerSideProps({ query }) {
+//   const page = parseInt(query.page) || 1;
+//   try {
+//     const totalUsersResponse = await fetch("http://localhost:5000/users");
+//     const totalUsers = await totalUsersResponse.json();
 
-    const startIndex = (page - 1) * PAGE_SIZE;
-    const response = await fetch(
-      `http://localhost:5000/users?_limit=${PAGE_SIZE}&_start=${startIndex}`
-    );
-    const users = await response.json();
+//     const startIndex = (page - 1) * PAGE_SIZE;
+//     const response = await fetch(
+//       `http://localhost:5000/users?_limit=${PAGE_SIZE}&_start=${startIndex}`
+//     );
+//     const users = await response.json();
 
 
-    return {
-      props: {
-        users,
-        totalUsers: totalUsers.length,
-        currentPage: page,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching user data: ", error);
-    return {
-      notFound: true,
-    };
-  }
-}
+//     return {
+//       props: {
+//         users,
+//         totalUsers: totalUsers.length,
+//         currentPage: page,
+//       },
+//     };
+//   } catch (error) {
+//     console.error("Error fetching user data: ", error);
+//     return {
+//       notFound: true,
+//     };
+//   }
+// }

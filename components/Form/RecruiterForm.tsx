@@ -1,15 +1,15 @@
 import { Button, PasswordInput, Stack, TextInput } from "@mantine/core";
 import { hasLength, useForm } from "@mantine/form";
 import axios from "axios";
-function WorkerForm() {
-  const workerForm = useForm({
+function RecruiterForm() {
+  const recruiterForm = useForm({
     initialValues: {
       name: "",
       email: "",
       phone: "",
       password: "",
       confirmPassword: "",
-      roles: "WORKER",
+      roles: "RECRUITER",
     },
     validate: {
       name: hasLength({ min: 2, max: 50 }),
@@ -21,7 +21,7 @@ function WorkerForm() {
     },
   });
 
-  const handleSubmit = workerForm.onSubmit(async (values) => {
+  const handleSubmit = recruiterForm.onSubmit(async (values) => {
     try {
       const response = await axios.post("/api/register", values);
       if (response.status === 201) {
@@ -37,35 +37,35 @@ function WorkerForm() {
       <form onSubmit={handleSubmit}>
         <Stack spacing="md">
           <TextInput
-            {...workerForm.getInputProps("name")}
+            {...recruiterForm.getInputProps("name")}
             placeholder="Masukkan nama lengkap..."
             name="name"
             label="Nama Lengkap"
             withAsterisk
           />
           <TextInput
-            {...workerForm.getInputProps("email")}
+            {...recruiterForm.getInputProps("email")}
             placeholder="Masukkan email..."
             name="email"
             label="Email"
             withAsterisk
           />
           <TextInput
-            {...workerForm.getInputProps("phone")}
+            {...recruiterForm.getInputProps("phone")}
             placeholder="Masukkan nomor telepon..."
             name="phone"
             label="Nomor Telepon"
             withAsterisk
           />
           <PasswordInput
-            {...workerForm.getInputProps("password")}
+            {...recruiterForm.getInputProps("password")}
             placeholder="Masukkan password"
             name="password"
             label="Password"
             withAsterisk
           />
           <PasswordInput
-            {...workerForm.getInputProps("confirmPassword")}
+            {...recruiterForm.getInputProps("confirmPassword")}
             placeholder="Konfirmasi password Anda..."
             name="confirmPassword"
             label="Konfirmasi Password"
@@ -80,4 +80,4 @@ function WorkerForm() {
   );
 }
 
-export default WorkerForm;
+export default RecruiterForm;
