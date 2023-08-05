@@ -21,7 +21,7 @@ function UserCatalogue({ user }: any) {
       month: "long",
     });
   };
-  const UserPortfolio = userData.portfolios.map((_p) => (
+  const UserPortfolio = userData.portfolios.map((_p: any) => (
     <div key={_p.portfolio.id} className="flex flex-col justify-center items-center text-center gap-2">
       <a href={_p.portfolio.link} target="_blank">
         <Image
@@ -41,7 +41,7 @@ function UserCatalogue({ user }: any) {
     </div>
   ));
 
-  const UserExperience = userData.experiences.map((_e) => (
+  const UserExperience = userData.experiences.map((_e: any) => (
     <Stack key={_e.experience.experienceId} spacing="sm">
       <div className="">
       <Title order={5}>{_e.experience.position}</Title>
