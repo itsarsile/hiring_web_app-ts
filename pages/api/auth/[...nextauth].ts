@@ -62,7 +62,10 @@ export const authOptions: NextAuthOptions = {
             // console.log("JWT CALLBACK: ", { token, user })
             if (user) {
                 token.id = user.id
+                //@ts-ignore
                 token.role = user.role
+                                //@ts-ignore
+
                 token.photo = user.photo
             }
             return token
