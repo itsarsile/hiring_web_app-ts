@@ -10,7 +10,6 @@ export default function Navbar() {
       router.push("/")
   }
   const { data: session, status } = useSession();
-  console.log(session)
   return (
     <div className="navbar">
       <div className="navbar-start">
@@ -62,7 +61,7 @@ export default function Navbar() {
               <div className="avatar cursor-pointer hover:ring-primary">
                 <div className="w-8 rounded-full">
                   <Image
-                    src={session?.user?.photo}
+                    src={session?.user?.photo || ""}
                     width={80}
                     height={80}
                     alt="avatar"

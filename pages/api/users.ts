@@ -22,6 +22,7 @@ export default async function handler(
             photo: true,
             workerProfile: {
                 select: {
+                  currentJob: true,
                   workPlace: true,
                     province: {
                         select: {
@@ -29,7 +30,7 @@ export default async function handler(
                         }
                     }
                 }
-            }
+            },
         }
     });
 

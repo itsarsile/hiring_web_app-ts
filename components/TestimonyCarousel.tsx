@@ -50,7 +50,7 @@ export default function TestimonyCarousel() {
     <>
       <Carousel className="max-w-4xl" slideSize="33%" mx="auto" withIndicators height={435} slideGap="sm" slidesToScroll={3} loop align="start">
         {data.map((user) => (
-          <Carousel.Slide key={user}>
+          <Carousel.Slide key={user.name}>
             <div className="card border h-96 shadow-md">
               <div className="card-body justify-center">
                 <div className="mx-auto w-20">

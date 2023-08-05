@@ -1,5 +1,5 @@
-export default function SearchBar({ searchQuery, setSearchQuery, searchFilter, setSearchFilter, onSearch }) {
-    const handleKeyPress = (event) => {
+export default function SearchBar({ searchQuery, setSearchQuery, searchFilter, setSearchFilter, onSearch }: any) {
+    const handleKeyPress = (event: React.KeyboardEvent) => {
       if (event.key === "Enter") {
         console.log(event)
         onSearch(searchQuery, searchFilter);
