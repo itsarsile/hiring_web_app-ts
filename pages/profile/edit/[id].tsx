@@ -3,8 +3,9 @@ import { Container, Grid } from "@mantine/core";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
-import UserBasicInfoEdit from "./components/UserBasicInfoEdit";
-import EditUser from "./components/Forms/EditUser";
+import UserBasicInfoEdit from "../../../components/UserBasicInfoEdit";
+import UserBasicInfo from "@/components/UserBasicInfo";
+import EditUser from '@/components/Form/EditUser'
 export default function EditProfilePage({ user }: any) {
   const router = useRouter();
   const { data: session, status } = useSession();

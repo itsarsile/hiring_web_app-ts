@@ -1,8 +1,8 @@
 import Layout from "@/components/Layout";
-import UserBasicInfo from "./components/UserBasicInfo";
+import UserBasicInfo from "../../components/UserBasicInfo";
 import { GetServerSideProps } from "next";
 import axios from "axios";
-import UserCatalogue from "./components/UserCatalogue";
+import UserCatalogue from "@/components/UserCatalogue";
 import { Container, Grid } from "@mantine/core";
 
 
