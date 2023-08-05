@@ -15,27 +15,28 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       //@ts-ignore
-      authorize: async (credentials: UserCredentials, _req) => {
-        const { email, password } = credentials;
-        try {
-          const user = await prisma.user.findUnique({
-            where: { email },
-          });
-
-          if (user && bcrypt.compareSync(password, user.password)) {
-            return {
-              id: user.id,
-              name: user.name,
-              role: user.role,
-              photo: user.photo,
-            };
-          } else {
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials.password) {
             return null;
           }
-        } catch (error) {
-          console.error("Error fetching user data: ", error);
-          return null;
-        }
+  
+          const user = await prisma.user.findUnique({
+            where: {
+              email: credentials.email,
+            },
+          });
+  
+          if (!user || !(await bcrypt.compare(credentials.password, user.password))) {
+            return null;
+          }
+  
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            photo: user.photo,
+            role: user.role,
+          };
       },
     }),
   ],
@@ -43,30 +44,30 @@ export const authOptions: NextAuthOptions = {
     signIn: "/auth/login",
   },
   callbacks: {
-    session: async ({ session, token }) => {
-      // console.log("Session Callback", { session, token });
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id,
-          photo: token.photo,
-          roles: token.role,
-        },
-      };
-    },
-    // jwt: async ({ token, user }) => {
-    //   // console.log("JWT CALLBACK: ", { token, user })
-    //   if (user) {
-    //     token.id = user.id;
-    //     //@ts-ignore
-    //     token.role = user.role;
-    //     //@ts-ignore
-
-    //     token.photo = user.photo;
-    //   }
-    //   return token;
-    // },
+    session: ({ session, token }) => {
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            id: token.id,
+            photo: token.photo,
+            role: token.role 
+          },
+        };
+      },
+      jwt: ({ token, user }) => {
+        console.log({token, user})
+        if (user) {
+          const u = user as unknown as any;
+          return {
+            ...token,
+            id: u.id,
+            photo: u.photo,
+            role: u.role
+          };
+        }
+        return token;
+      },
   },
 };
 
