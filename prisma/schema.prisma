@@ -15,7 +15,9 @@ model User {
   photo            String?
   password         String
   bio              String?
-  skills           String[]
+  skills           String?
+  github           String?
+  instagram        String?
   role             UserRoles
   recruiterProfile RecruiterProfile?
   workerProfile    WorkerProfile?
@@ -74,6 +76,7 @@ model Experience {
 
 model Portfolio {
   id        Int      @id @default(autoincrement())
+  title     String
   link      String
   types     String
   photo     String
