@@ -18,6 +18,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/supabase.js", "pages/api/auth/[...nextauth].Js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/supabase.Ts", "pages/api/auth/[...nextauth].Js"],
   "exclude": ["node_modules"]
 }

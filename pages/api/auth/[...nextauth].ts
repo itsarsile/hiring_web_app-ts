@@ -14,7 +14,6 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      //@ts-ignore
       async authorize(credentials) {
         if (!credentials?.email || !credentials.password) {
             return null;
@@ -44,6 +43,7 @@ export const authOptions: NextAuthOptions = {
     signIn: "/auth/login",
   },
   callbacks: {
+    
     session: ({ session, token }) => {
         return {
           ...session,
