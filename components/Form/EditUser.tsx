@@ -190,8 +190,12 @@ function BasicInfoForm({ userId }: any) {
     }
   }, [data]);
 
+  const handleSubmit = form.onSubmit((values) => {
+    console.log(values);
+  })
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Stack>
         <TextInput
           label="Nama Lengkap"
@@ -206,6 +210,7 @@ function BasicInfoForm({ userId }: any) {
           {...form.getInputProps("workPlace")}
         />
         <Textarea label="Bio" placeholder="Ceritakan tentang diri Anda..." {...form.getInputProps("bio")}/>
+        <Button type="submit" variant="outline">Simpan</Button>
       </Stack>
     </form>
   );
