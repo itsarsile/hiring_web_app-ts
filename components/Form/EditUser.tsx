@@ -170,6 +170,7 @@ function DisplayWorkExperience({ userId }: any) {
 
 function BasicInfoForm({ userId }: any) {
   const { data } = useSWR(`/api/users/${userId}`, fetcher);
+  const router = useRouter()
   const userData = data && data?.user;
   const form = useForm({
     initialValues: {
@@ -192,10 +193,12 @@ function BasicInfoForm({ userId }: any) {
 
   const handleSubmit = form.onSubmit(async (values) => {
     try {
-      await axios.patch(`/api/users/${userId}`, values)
-      .then(() => {
-        window.location.reload()
-      })
+      const response = await axios.patch(`/api/users/${userId}`, values)
+      if (response.status === 200) {
+        console.log("Success added skill");
+        // Update the cached skill data with the new values
+       router.reload()
+      }
     } catch (error) {
       console.error(error);
     }
