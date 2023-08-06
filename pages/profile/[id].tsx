@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     };
   }
   const { id } = params;
-  const userData = await fetch(`/api/users/${id}`);
+  const userData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`);
   const user = await userData.json();
   return {
     props: {
