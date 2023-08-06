@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import Layout from "@/components/Layout";
-import SearchBar from "@/components/SearchBar";
-import { useRouter } from "next/router";
 import UserCards from "@/components/UserCards";
+import { fetcher } from "@/lib/fetcher";
+import useSWR from "swr";
+
 
 
 
 export default function Home() {
-  const router = useRouter();
+  const { data, error, isLoading } = useSWR("/api/users", fetcher);
+  console.log(data)
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <Layout>

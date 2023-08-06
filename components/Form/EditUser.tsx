@@ -25,9 +25,10 @@ import { useEffect, useState } from "react";
 import { FiImage, FiUpload, FiX } from "react-icons/fi";
 import { supabase } from "@/lib/supabase";
 import axios from "axios";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { fetcher } from "@/lib/fetcher";
 import { useDisclosure } from "@mantine/hooks";
+import { useRouter } from "next/router";
 
 const developerSkills = [
   "HTML",
@@ -169,30 +170,37 @@ function DisplayWorkExperience({ userId }: any) {
 
 function BasicInfoForm({ userId }: any) {
   const { data } = useSWR(`/api/users/${userId}`, fetcher);
-  const userData = data && data?.user
+  const userData = data && data?.user;
   const form = useForm({
     initialValues: {
       name: "",
       currentJob: "",
       workPlace: "",
       bio: "",
-
     },
   });
   useEffect(() => {
     if (data) {
       form.setValues({
-        name: userData.name,
-        currentJob: userData.workerProfile.currentJob,
-        bio: userData.bio,
-        workPlace: userData.workerProfile.workPlace,
-      })
+        name: userData.name || "",
+        currentJob: userData.workerProfile?.currentJob || "",
+        bio: userData.bio || "",
+        workPlace: userData.workerProfile.workPlace || "",
+      });
     }
   }, [data]);
 
-  const handleSubmit = form.onSubmit((values) => {
-    console.log(values);
-  })
+  const handleSubmit = form.onSubmit(async (values) => {
+    try {
+      const response = await axios.patch(`/api/users/${userId}`, values);
+      if (response.status === 200) {
+        await mutate(`/api/users/${userId}`);
+        console.log("User data updated successfully")
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  });
 
   return (
     <form onSubmit={handleSubmit}>
@@ -202,39 +210,46 @@ function BasicInfoForm({ userId }: any) {
           placeholder="Masukkan nama lengkap..."
           {...form.getInputProps("name")}
         />
-        <TextInput label="Job Desk" placeholder="Masukkan job desk..." {...form.getInputProps("currentJob")}/>
-        <TextInput label="Domisili" placeholder="Masukkan domisili..."/>
+        <TextInput
+          label="Job Desk"
+          placeholder="Masukkan job desk..."
+          {...form.getInputProps("currentJob")}
+        />
+        <TextInput label="Domisili" placeholder="Masukkan domisili..." />
         <TextInput
           label="Tempat Kerja"
           placeholder="Masukkan Tempat Kerja..."
           {...form.getInputProps("workPlace")}
         />
-        <Textarea label="Bio" placeholder="Ceritakan tentang diri Anda..." {...form.getInputProps("bio")}/>
-        <Button type="submit" variant="outline">Simpan</Button>
+        <Textarea
+          label="Bio"
+          placeholder="Ceritakan tentang diri Anda..."
+          {...form.getInputProps("bio")}
+        />
+        <Button type="submit" variant="outline">
+          Simpan
+        </Button>
       </Stack>
     </form>
   );
 }
 
-function SkillInfoForm({ userId }: any) { 
+function SkillInfoForm({ userId }: any) {
   const { data } = useSWR(`/api/skill/user/${userId}`, fetcher);
   const skillForm = useForm({
     initialValues: {
       skills: [],
     },
-    
   });
-
 
   useEffect(() => {
     if (data) {
       const skillsArr = data[0].skills.split(", ");
       skillForm.setValues({
         skills: skillsArr,
-      })
+      });
     }
   }, [data]);
-
 
   const handleSubmit = skillForm.onSubmit(async (values) => {
     try {
@@ -268,12 +283,10 @@ function SkillInfoForm({ userId }: any) {
 }
 
 function WorkExperienceModal() {
-  const [opened, { open, close }] = useDisclosure(false)
+  const [opened, { open, close }] = useDisclosure(false);
   return (
-    <Modal opened={opened} onClose={close} title="Edit Work Experience">
-      
-    </Modal>
-  )
+    <Modal opened={opened} onClose={close} title="Edit Work Experience"></Modal>
+  );
 }
 
 function WorkExperienceForm({ userId }: any) {

@@ -73,7 +73,7 @@ router
     console.error("Error fetching user data: ", error);
   }
   })
-  .put(async (req, res) => {
+  .patch(async (req, res) => {
     const { id } = req.query;
     const { name, workPlace, currentJob, bio } = req.body
     try {
