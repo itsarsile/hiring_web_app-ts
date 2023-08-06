@@ -3,6 +3,7 @@ import UserBasicInfo from "../../components/UserBasicInfo";
 import { GetServerSideProps } from "next";
 import UserCatalogue from "@/components/UserCatalogue";
 import { Container, Grid } from "@mantine/core";
+import axios from "axios";
 
 
 export default function ProfilePage({ user }: any) {
@@ -29,12 +30,22 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     };
   }
   const { id } = params;
-  const userData = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${id}`);
-  const user = await userData.json();
-  return {
-    props: {
-      params,
-      user,
-    },
-  };
+
+  try {
+    const response = await axios.get(`http://localhost:3000/api/users/${id}`);
+    const user = response.data;
+
+    return {
+      props: {
+        params,
+        user,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+
+    return {
+      notFound: true,
+    };
+  }
 };

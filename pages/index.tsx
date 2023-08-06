@@ -8,7 +8,6 @@ import TestimonyCarousel from "@/components/TestimonyCarousel";
 export default function Home() {
   const router = useRouter();
   const { data, status } = useSession();
-  console.log(data?.user, status);
   return (
     <Layout>
       <main>

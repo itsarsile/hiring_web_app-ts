@@ -77,7 +77,7 @@ router
     const { id } = req.query;
     const { name, workPlace, currentJob, bio } = req.body
     try {
-      const response = await prisma.user.update({
+      await prisma.user.update({
         where: { id: Number(id) },
         data: {
           name,
@@ -90,10 +90,9 @@ router
           }
         }
       })
-
+      return res.status(200).json({ message: "Profile updated successfully" })
     } catch (error) {
       console.error("Error during updating profile:", error);
-      
     }
   })
 

@@ -192,11 +192,10 @@ function BasicInfoForm({ userId }: any) {
 
   const handleSubmit = form.onSubmit(async (values) => {
     try {
-      const response = await axios.patch(`/api/users/${userId}`, values);
-      if (response.status === 200) {
-        await mutate(`/api/users/${userId}`);
-        console.log("User data updated successfully")
-      }
+      await axios.patch(`/api/users/${userId}`, values)
+      .then(() => {
+        window.location.reload()
+      })
     } catch (error) {
       console.error(error);
     }
