@@ -16,23 +16,18 @@ function LoginForm() {
   });
 
   const handleSubmit = loginForm.onSubmit(async (values, event) => {
-    event.preventDefault()
     try {
-      const response = await signIn("credentials", values);
+      const response = await signIn("credentials", {...values, callbackUrl: '/'});
       if (response?.error) {
-          console.error("Error logging in", response?.error);
-        } else {
-          console.log("User logged in successfully");
+        console.error("Error logging in", response?.error);
+      } else {
+        console.log("User logged in successfully");
       }
     } catch (error) {
       console.error("Error logging in", error);
     }
   });
 
-  if (status === "authenticated") {
-    router.push("/home")
-  }
-  
   return (
     <>
       <form onSubmit={handleSubmit}>

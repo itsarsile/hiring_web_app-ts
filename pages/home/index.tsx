@@ -4,7 +4,7 @@ import Link from "next/link";
 import Layout from "@/components/Layout";
 import SearchBar from "@/components/SearchBar";
 import { useRouter } from "next/router";
-import UserCards from "./UserCards";
+import UserCards from "@/components/UserCards";
 
 
 
@@ -20,38 +20,12 @@ export default function Home() {
         </div>
       </div>
       <div className="max-w-6xl mx-auto mt-10">
-        {/* Search Bar */}
-
         <div className="my-10">
           <div className="flex flex-col rounded-lg shadow-xl">
-            {/* People Cards */}
             <UserCards />
           </div>
         </div>
       </div>
-
-      {/* Pagination */}
-      {/* <div className="flex justify-center my-5 text-white">
-        <div className="join">
-          {currentPage > 1 && (
-            <button
-              class="join-item btn btn-outline border-primary"
-              onClick={() => handlePagination(currentPage - 1)}
-            >
-              {currentPage - 1}
-            </button>
-          )}
-          <button class="join-item btn btn-active bg-primary">{currentPage}</button>
-          {currentPage < totalUsers && (
-            <button
-              class="join-item btn btn-outline border-primary"
-              onClick={() => handlePagination(currentPage + 1)}
-            >
-              {currentPage + 1}
-            </button>
-          )}
-        </div>
-      </div> */}
     </Layout>
   );
 }

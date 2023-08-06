@@ -9,6 +9,7 @@ export default function Navbar() {
       await signOut();
       router.push("/")
   }
+
   const { data: session, status } = useSession();
   return (
     <div className="navbar">

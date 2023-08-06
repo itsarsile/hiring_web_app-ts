@@ -17,6 +17,7 @@ export default function Home() {
             <div className="hero-content flex-col lg:flex-row-reverse">
               <Image
                 src="/landing_image_1.png"
+                priority
                 width={617}
                 height={617}
                 alt="landing page image"
