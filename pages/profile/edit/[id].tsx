@@ -3,8 +3,8 @@ import { Container, Grid } from "@mantine/core";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
-import UserBasicInfoEdit from "../../../components/UserBasicInfoEdit";
-import UserBasicInfo from "@/components/UserBasicInfo";
+import UserBasicInfoEdit from "@/components/UserBasicInfoEdit";
+
 import EditUser from '@/components/Form/EditUser'
 export default function EditProfilePage({ user }: any) {
   const router = useRouter();
@@ -12,16 +12,15 @@ export default function EditProfilePage({ user }: any) {
   if (status === "unauthenticated") {
     router.push("/");
   }
-  const userId = session?.user?.id
   return (
     <Layout>
       <Container my="lg">
         <Grid grow>
           <Grid.Col lg={1} sm={1}>
-              <UserBasicInfoEdit user={user} />
+              <UserBasicInfoEdit user={user} userRole={session?.user?.role}/>
           </Grid.Col>
           <Grid.Col lg={5} sm={1}>
-            <EditUser user={user}/>
+            <EditUser user={user}  userRole={session?.user?.role}/>
             </Grid.Col>
         </Grid>
       </Container>

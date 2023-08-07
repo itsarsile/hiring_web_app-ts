@@ -1,6 +1,8 @@
 import { Button, PasswordInput, Stack, TextInput } from "@mantine/core";
 import { hasLength, useForm } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import axios from "axios";
+import { signIn } from "next-auth/react";
 function RecruiterForm() {
   const recruiterForm = useForm({
     initialValues: {
@@ -25,6 +27,12 @@ function RecruiterForm() {
     try {
       const response = await axios.post("/api/register", values);
       if (response.status === 201) {
+        notifications.show({
+          title: "Success",
+          message: "User created successfully",
+          color: "green",
+        })
+        await signIn('credentials', values)
         console.log("User created successfully");
       }
     } catch (error) {

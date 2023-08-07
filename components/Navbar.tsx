@@ -1,3 +1,4 @@
+import { Button } from "@mantine/core";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,26 +7,37 @@ import { useRouter } from "next/router";
 export default function Navbar() {
   const router = useRouter();
   const handleSignOut = async () => {
-      await signOut();
-      router.push("/")
-  }
+    await signOut();
+    router.push("/");
+  };
 
   const { data: session, status } = useSession();
   return (
     <div className="navbar">
       <div className="navbar-start">
-      <Link href="/home">
-        <Image src="/logo-purple.svg" width={80} height={24} alt="logo" />
-      </Link>
+        <Link href="/home">
+          <Image src="/logo-purple.svg" width={80} height={24} alt="logo" />
+        </Link>
       </div>
-      <div className="navbar-end space-x-5">
+      <div className="navbar-end space-x-3">
         {status === "unauthenticated" ? (
-          <button
-            className="btn btm-nav-sm rounded-md text-white bg-primary"
-            onClick={() => signIn("credentials")}
-          >
-            Masuk sebagai pekerja
-          </button>
+          <>
+            <Button
+              color="blue"
+              className="bg-blue-600 text-white"
+              onClick={() => signIn("credentials")}
+            >
+              MASUK
+            </Button>
+            <Link href="/auth/register">
+            <Button
+              color="blue"
+              className="bg-blue-600 text-white"
+            >
+              DAFTAR
+            </Button>
+            </Link>
+          </>
         ) : status === "loading" ? (
           <span>Loading...</span>
         ) : (
@@ -75,11 +87,15 @@ export default function Navbar() {
                 className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                <Link href={`/profile/${session?.user?.id}`}>Profile</Link>
-                <Link href={`/profile/edit/${session?.user?.id}`}>Edit Profile</Link>
+                  {session?.user?.role === "WORKER" &&
+                    <Link href={`/profile/${session?.user?.id}`}>Profile</Link>
+                  }
+                  <Link href={`/profile/edit/${session?.user?.id}`}>
+                    Edit Profile
+                  </Link>
                 </li>
                 <li>
-                <button onClick={handleSignOut}>Logout</button>
+                  <button onClick={handleSignOut}>Logout</button>
                 </li>
               </ul>
             </div>

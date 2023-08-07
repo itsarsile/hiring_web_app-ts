@@ -4,6 +4,7 @@ import { MantineProvider } from "@mantine/core";
 import { SessionProvider } from "next-auth/react";
 import { AppProps } from "next/app";
 import { RouterTransition } from "@/components/RouterTransition";
+import { Notifications } from '@mantine/notifications'
 const opensans = Open_Sans({ subsets: ["latin"] });
 
 export default function App(props: AppProps) {
@@ -19,6 +20,7 @@ export default function App(props: AppProps) {
           }}
         >
           <RouterTransition />
+          <Notifications />
           <Component {...pageProps} />
         </MantineProvider>
       </SessionProvider>

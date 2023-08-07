@@ -48,10 +48,22 @@ const data = [
 export default function TestimonyCarousel() {
   return (
     <>
-      <Carousel className="max-w-4xl" slideSize="33%" mx="auto" withIndicators height={435} slideGap="sm" slidesToScroll={3} loop align="start">
+      <Carousel className="max-w-full"
+        slideSize="100%" // Initially, show 1 card on all screens
+        mx="auto"
+        withIndicators
+        height={435}
+        slideGap="sm"
+        slidesToScroll={1} // Initially, scroll 1 card at a time
+        loop
+        align="start"
+        breakpoints={[
+          { maxWidth: 639, slideSize: "100%" }, // Small screen: 1 card
+          { minWidth: 640, slideSize: "33.33%" }, // Large screen: 3 cards
+        ]}>
         {data.map((user) => (
           <Carousel.Slide key={user.name}>
-            <div className="card border h-96 shadow-md">
+            <div className="card border h-96 shadow-md bg-white">
               <div className="card-body justify-center">
                 <div className="mx-auto w-20">
                   <Image

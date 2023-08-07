@@ -14,83 +14,63 @@ model User {
   email            String            @unique
   photo            String?
   password         String
+  role             UserRoles
   bio              String?
-  skills           String?
   github           String?
   instagram        String?
-  role             UserRoles
+  skills           String?
+  domicile         String?
   recruiterProfile RecruiterProfile?
+  experiences      UserExperience[]
+  portfolios       UserPortfolio[]
   workerProfile    WorkerProfile?
-
-  portfolios  UserPortfolio[]
-  experiences UserExperience[]
 }
 
 model RecruiterProfile {
-  userId         Int       @id
-  user           User      @relation(fields: [userId], references: [id])
-  companyName    String?
-  companyEmail   String?
-  companyPhone   String?
-  companySegment String?
-  companyInfo    String?
-  province       Province? @relation(fields: [provinceId], references: [id])
-  provinceId     Int?
-}
-
-model Province {
-  id               Int                @id @default(autoincrement())
-  name             String
-  cities           City[]
-  RecruiterProfile RecruiterProfile[]
-  WorkerProfile    WorkerProfile[]
-}
-
-model City {
-  id         Int      @id @default(autoincrement())
-  name       String
-  province   Province @relation(fields: [provinceId], references: [id])
-  provinceId Int
+  companyName     String?
+  companyEmail    String?
+  companyPhone    String?
+  companySegment  String?
+  companyInfo     String?
+  userId          Int     @id
+  companyDomicile String?
+  user            User    @relation(fields: [userId], references: [id])
 }
 
 model WorkerProfile {
-  userId     Int       @id
-  user       User      @relation(fields: [userId], references: [id])
+  provinceId Int?
   workPlace  String?
   currentJob String?
-  province   Province? @relation(fields: [provinceId], references: [id])
-  provinceId Int?
+  userId     Int     @id
+  user       User    @relation(fields: [userId], references: [id])
 }
 
 model Experience {
-  id          Int      @id @default(autoincrement())
+  id          Int              @id @default(autoincrement())
   position    String
   companyName String
   description String
   startAt     DateTime
   endedAt     DateTime
-  createdAt   DateTime @default(now())
-
-  users UserExperience[]
+  createdAt   DateTime         @default(now())
+  users       UserExperience[]
 }
 
 model Portfolio {
-  id        Int      @id @default(autoincrement())
-  title     String
+  id        Int             @id @default(autoincrement())
   link      String
   types     String
   photo     String
-  createdAt DateTime @default(now())
-
-  users UserPortfolio[]
+  createdAt DateTime        @default(now())
+  title     String
+  users     UserPortfolio[]
 }
 
 model UserExperience {
   userId       Int
   experienceId Int
-
-  user       User       @relation(fields: [userId], references: [id])
-  experience Experience @relation(fields: [experienceId], references: [id])
+  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user         User       @relation(fields: [userId], references: [id])
 
   @@id([userId, experienceId])
 }
@@ -98,9 +78,8 @@ model UserExperience {
 model UserPortfolio {
   userId      Int
   portfolioId Int
-
-  user      User      @relation(fields: [userId], references: [id])
-  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user        User      @relation(fields: [userId], references: [id])
 
   @@id([userId, portfolioId])
 }

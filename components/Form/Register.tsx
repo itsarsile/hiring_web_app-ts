@@ -1,8 +1,7 @@
-import { Tabs, TextInput } from '@mantine/core'
-import {useForm} from '@mantine/form'
-import { useState } from 'react'
+import { Tabs, Text, TextInput } from '@mantine/core'
 import WorkerForm from './WorkerForm'
 import RecruiterForm from './RecruiterForm'
+import { signIn } from 'next-auth/react'
 function RegisterForm() {
 
 
@@ -20,6 +19,9 @@ function RegisterForm() {
             <Tabs.Panel value='recruiter' pt="xs">
               <RecruiterForm />
             </Tabs.Panel>
+            <div className="mt-5 text-center">
+              Sudah punya akun? <Text component='button' className='text-amber-400' onClick={() => signIn("credentials")}>Login</Text>
+            </div>
         </Tabs>
     </>
   )

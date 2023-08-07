@@ -26,16 +26,35 @@ export default async function handler(
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await prisma.user.create({
+    const createdUser = await prisma.user.create({
         data: {
             name,
             email,
             phone,
             password: hashedPassword,
             role: roles,
-            photo: DEFAULT_PHOTO
-        }
+            photo: DEFAULT_PHOTO,
+        },
     })
+
+    if (roles === "WORKER") {
+      // Create a WorkerProfile for the new user
+      await prisma.workerProfile.create({
+        data: {
+          userId: createdUser.id,
+
+        },
+      });
+    } else if (roles === "RECRUITER") {
+      // Create a RecruiterProfile for the new user
+      await prisma.recruiterProfile.create({
+        data: {
+          userId: createdUser.id,
+
+          // Other recruiter profile fields
+        },
+      });
+    }
 
     res.status(201).json({ message: "User created successfully"});
   } catch (error) {

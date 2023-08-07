@@ -4,6 +4,7 @@ import { signIn, useSession } from "next-auth/react";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { useRouter } from "next/router";
 import TestimonyCarousel from "@/components/TestimonyCarousel";
+import { Button } from "@mantine/core";
 
 export default function Home() {
   const router = useRouter();
@@ -29,12 +30,13 @@ export default function Home() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   euismod ipsum et dui rhoncus auctor.
                 </p>
-                <button
+                <Button
                   onClick={() => router.push("/home")}
-                  className="btn-md lg:btn-lg bg-primary text-white rounded-md"
+                  size="lg"
+                  className="bg-blue-600"
                 >
                   Mulai Dari Sekarang
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -115,37 +117,37 @@ export default function Home() {
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>PHP</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>React</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>Python</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>HTML</p>
                     </div>
                   </div>
                   <div className="flex flex-col space-y-3 lg:space-y-5">
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>Mathlab</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>C++</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>JavaScript</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>Vue</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
