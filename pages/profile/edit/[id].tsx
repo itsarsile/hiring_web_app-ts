@@ -12,7 +12,6 @@ export default function EditProfilePage({ user }: any) {
   if (status === "unauthenticated") {
     router.push("/");
   }
-  const userId = session?.user?.id
   return (
     <Layout>
       <Container my="lg">

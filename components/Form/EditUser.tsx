@@ -180,12 +180,12 @@ function BasicInfoForm({ userId }: any) {
     },
   });
   useEffect(() => {
-    if (data) {
+    if (userData) {
       form.setValues({
         name: userData.name,
-        currentJob: userData.workerProfile.currentJob,
+        currentJob: userData?.workerProfile?.currentJob,
         bio: userData.bio,
-        workPlace: userData.workerProfile.workPlace,
+        workPlace: userData.workerProfile?.workPlace,
       })
     }
   }, [data]);
@@ -206,6 +206,7 @@ function BasicInfoForm({ userId }: any) {
           {...form.getInputProps("workPlace")}
         />
         <Textarea label="Bio" placeholder="Ceritakan tentang diri Anda..." {...form.getInputProps("bio")}/>
+        <Button type="submit" className="bg-indigo-600" color="indigo.6">Simpan</Button>
       </Stack>
     </form>
   );

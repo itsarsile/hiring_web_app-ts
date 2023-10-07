@@ -53,7 +53,7 @@ export default function UserCards() {
                     />
                   </svg>
                 </span>
-                {user.workerProfile?.province.cities[0].name}
+                {user.workerProfile?.province?.cities[0].name}
               </p>
               <div className="flex flex-wrap lg:flex-wrap lg:max-w-md lg:justify-start gap-2 justify-center">
                 {/* {user.skills &&

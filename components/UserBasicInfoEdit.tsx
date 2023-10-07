@@ -5,11 +5,9 @@ import {
     Card,
     Container,
     Divider,
-    Flex,
     Grid,
     Group,
     Stack,
-    Title,
     rem,
   } from "@mantine/core";
   import { HiOutlineMapPin } from "react-icons/hi2";
@@ -17,26 +15,25 @@ import {
   
   function UserBasicInfoEdit({ user }: any) {
     const userData = user.user;
-    const skillsArr = userData.skills.split(",")
+    const skillsArr = userData.skills ? userData.skills.split(",") : []
     return (
       <>
         <Card shadow="md" padding="md" withBorder radius="md">
           <Stack align="center">
-            <Card.Section>
+              <Card.Section>
               <Avatar mx="auto" src={userData.photo} size="xl" />
             </Card.Section>
           </Stack>
           <Container className="mt-5" maw={rem(300)}>
             <Stack spacing="xs">
               <p className="text-xl font-semibold">{userData.name}</p>
-              <p className="text-sm">{userData.workerProfile.workPlace}</p>
+              <p className="text-sm">{userData.workerProfile?.workPlace}</p>
               <Group className="text-slate-400" spacing="xs">
                 <HiOutlineMapPin />
-                {userData.workerProfile.province.cities[0].name},{" "}
-                {userData.workerProfile.province.name}{" "}
+                {userData.workerProfile?.province ? userData.workerProfile.province.cities[0].name : "Not yet set" } 
               </Group>
               <p className="text-sm text-slate-400">
-                {userData.workerProfile.currentJob}
+                {userData.workerProfile?.currentJob}
               </p>
               <p className="text-sm text-slate-400">
                 {userData.bio}
@@ -76,7 +73,6 @@ import {
                   </Group>
                 </Stack>
               </div>
-              <Button mt="lg"  className="bg-blue-500">Simpan</Button>
             </Stack>
           </Container>
         </Card>
