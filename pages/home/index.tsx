@@ -1,20 +1,11 @@
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import Layout from "@/components/Layout";
-import SearchBar from "@/components/SearchBar";
-import { useRouter } from "next/router";
 import UserCards from "./UserCards";
 
-
-
 export default function Home() {
-  const router = useRouter();
-
 
   return (
     <Layout>
-      <div className="bg-primary">
+      <div className="bg-violet-800">
         <div className="max-w-6xl mx-auto p-5">
           <h1 className="text-2xl -ml-2 text-white font-bold">Top Jobs</h1>
         </div>

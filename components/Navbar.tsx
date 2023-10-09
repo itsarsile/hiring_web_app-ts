@@ -1,3 +1,4 @@
+import { Button } from "@mantine/core";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,12 +20,13 @@ export default function Navbar() {
       </div>
       <div className="navbar-end space-x-5">
         {status === "unauthenticated" ? (
-          <button
-            className="btn btm-nav-sm rounded-md text-white bg-primary"
+          <Button
+            color="indigio.6"
+            className="btn btm-nav-sm rounded-md text-white bg-indigo-600"
             onClick={() => signIn("credentials")}
           >
             Masuk sebagai pekerja
-          </button>
+          </Button>
         ) : status === "loading" ? (
           <span>Loading...</span>
         ) : (

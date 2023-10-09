@@ -22,7 +22,11 @@ function UserBasicInfo({ user }: any) {
       <Card shadow="md" padding="md" withBorder radius="md">
         <Stack align="center">
           <Card.Section>
-            <Avatar mx="auto" src={userData.photo} size="xl" />
+            <Avatar mx="auto" src={userData.photo} size="xl" styles={{
+              image: {
+                borderRadius: "100%"
+              }
+            }}/>
           </Card.Section>
         </Stack>
         <Container className="mt-5">
@@ -44,7 +48,7 @@ function UserBasicInfo({ user }: any) {
               <Grid my="md" gutter="xs">
                 {skillsArr.map((skill: any) => (
                   <Grid.Col span="auto" key={skill}>
-                    <Badge  fullWidth key={skill} radius="md" >
+                    <Badge  fullWidth key={skill} radius="md" color="violet.8">
                       {skill}
                     </Badge>
                   </Grid.Col>
@@ -73,7 +77,7 @@ function UserBasicInfo({ user }: any) {
                 </Group>
               </Stack>
             </div>
-            <Button mt="lg" className="bg-blue-500">
+            <Button mt="lg" className="bg-violet-800">
               Hire
             </Button>
           </Stack>

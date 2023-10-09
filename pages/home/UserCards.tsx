@@ -1,5 +1,5 @@
 import { fetcher } from "@/lib/fetcher";
-import Image from "next/image";
+import { Image } from "@mantine/core";
 import Link from "next/link";
 import useSWR from "swr";
 
@@ -26,7 +26,11 @@ export default function UserCards() {
               width={100}
               height={100}
               alt="avatar"
-              className="rounded-full"
+              styles={{
+                image: {
+                  borderRadius: "100%"
+                }
+              }}
             />
             <div className="flex flex-col gap-3">
               <h1 className="text-2xl font-bold">{user.name}</h1>
@@ -67,7 +71,7 @@ export default function UserCards() {
           </div>
           <div className="mt-5">
             <Link href={`/profile/${user?.id}`}>
-              <button className="btn-md flex-end rounded-md bg-primary text-white btn">
+              <button className="btn-md flex-end rounded-md bg-violet-800 text-white btn">
                 Lihat Profile
               </button>
             </Link>

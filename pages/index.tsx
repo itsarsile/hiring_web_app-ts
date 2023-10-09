@@ -4,6 +4,7 @@ import { signIn, useSession } from "next-auth/react";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { useRouter } from "next/router";
 import TestimonyCarousel from "@/components/TestimonyCarousel";
+import { Button } from "@mantine/core";
 
 export default function Home() {
   const router = useRouter();
@@ -29,12 +30,13 @@ export default function Home() {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                   euismod ipsum et dui rhoncus auctor.
                 </p>
-                <button
+                <Button
                   onClick={() => router.push("/home")}
-                  className="btn-md lg:btn-lg bg-primary text-white rounded-md"
+                  color="violet.8"
+                 className="btn-md lg:btn-lg bg-violet-800 text-white rounded-md"
                 >
                   Mulai Dari Sekarang
-                </button>
+                </Button>
               </div>
             </div>
           </div>
