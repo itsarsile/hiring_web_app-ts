@@ -1,7 +1,4 @@
 import Image from "next/image";
-import { useState } from "react";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import LoginForm from "@/components/Form/Login";
 

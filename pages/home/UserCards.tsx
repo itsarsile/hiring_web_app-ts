@@ -28,37 +28,43 @@ export default function UserCards() {
               alt="avatar"
               styles={{
                 image: {
-                  borderRadius: "100%"
-                }
+                  borderRadius: "100%",
+                },
               }}
             />
             <div className="flex flex-col gap-3">
               <h1 className="text-2xl font-bold">{user.name}</h1>
-              <p className="text-sm text-slate-400">{user.workerProfile?.currentJob}</p>
-              <p className="flex items-center text-sm gap-2 text-slate-400 lg:justify-start justify-center">
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-4 h-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                    />
-                  </svg>
-                </span>
-                {user.workerProfile?.province?.cities[0].name}
-              </p>
+              {user.workerProfile?.currentJob ? (
+                <p className="text-sm text-slate-400">
+                  {user.workerProfile?.currentJob}
+                </p>
+              ) : null}
+              {user.workerProfile?.province?.cities[0].name ? (
+                <p className="flex items-center text-sm gap-2 text-slate-400 lg:justify-start justify-center">
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-4 h-4"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                      />
+                    </svg>
+                  </span>
+                  {user.workerProfile?.province?.cities[0].name}
+                </p>
+              ) : null}
               <div className="flex flex-wrap lg:flex-wrap lg:max-w-md lg:justify-start gap-2 justify-center">
                 {/* {user.skills &&
                   Object.values(user.skills).map((skill) => (

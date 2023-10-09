@@ -46,7 +46,7 @@ function LoginForm() {
             placeholder="Masukkan password..."
             {...loginForm.getInputProps("password")}
           />
-          <Button type="submit" className="bg-amber-500" variant="filled">
+          <Button type="submit" className="bg-amber-500" color="yellow.5" variant="filled">
             Login
           </Button>
         </Stack>
