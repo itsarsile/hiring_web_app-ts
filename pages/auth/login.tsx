@@ -11,7 +11,7 @@ const LoginPage = () => {
       {/* Desktop */}
       <div className="hidden lg:block overflow-y-hidden h-min-screen">
         <div className="flex gap-5 relative">
-          <div className="hero bg-hero-login-img h-screen w-1/2">
+          <div className="hero bg-[url('../public/bg-login.png)] h-screen w-1/2">
             <div className="hero-overlay bg-indigo-900/60"></div>
             <Image
               src="/logo.svg"

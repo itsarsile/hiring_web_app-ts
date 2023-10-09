@@ -1,6 +1,5 @@
 import { Button, PasswordInput, Stack, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
@@ -47,7 +46,7 @@ function LoginForm() {
             placeholder="Masukkan password..."
             {...loginForm.getInputProps("password")}
           />
-          <Button type="submit" className="bg-blue-500" variant="filled">
+          <Button type="submit" className="bg-amber-500" variant="filled">
             Login
           </Button>
         </Stack>
