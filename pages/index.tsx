@@ -33,7 +33,7 @@ export default function Home() {
                 <Button
                   onClick={() => router.push("/home")}
                   color="violet.8"
-                 className="btn-md lg:btn-lg bg-violet-800 text-white rounded-md"
+                 className="btn-md lg:btn-lg bg-violet-600 text-white rounded-md"
                 >
                   Mulai Dari Sekarang
                 </Button>

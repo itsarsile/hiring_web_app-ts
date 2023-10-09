@@ -44,7 +44,7 @@ import {
                 <Grid my="md" gutter="xs">
                   {skillsArr.map((skill: any) => (
                     <Grid.Col span="auto" key={skill}>
-                    <Badge fullWidth key={skill} radius="md">
+                    <Badge fullWidth key={skill} radius="md" color="violet.6">
                       {skill}
                     </Badge>
                     </Grid.Col>

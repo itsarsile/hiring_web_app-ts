@@ -8,7 +8,9 @@ const LoginPage = () => {
       {/* Desktop */}
       <div className="hidden lg:block overflow-y-hidden h-min-screen">
         <div className="flex gap-5 relative">
-          <div className="hero bg-[url('../public/bg-login.png)] h-screen w-1/2">
+          <div className="hero h-screen w-1/2" style={{
+            backgroundImage: "url('./bg-login.png)"
+          }}>
             <div className="hero-overlay bg-indigo-900/60"></div>
             <Image
               src="/logo.svg"
@@ -17,7 +19,7 @@ const LoginPage = () => {
               alt="logo"
               className="absolute top-0 left-0 m-5"
             />
-            <div className="hero-content ma">
+            <div className="hero-content">
               <h1 className="text-4xl leading-normal text-white font-bold max-w-lg">
                 Temukan developer berbakat & terbaik di berbagai bidang keahlian
               </h1>
@@ -35,7 +37,7 @@ const LoginPage = () => {
               <span className="text-amber-400">
                 <Link href="/auth/register">Daftar</Link>
               </span>
-            </p>
+          </p>
           </div>
         </div>
       </div>

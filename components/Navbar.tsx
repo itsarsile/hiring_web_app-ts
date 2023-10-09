@@ -21,8 +21,9 @@ export default function Navbar() {
       <div className="navbar-end space-x-5">
         {status === "unauthenticated" ? (
           <Button
-            color="indigio.6"
-            className="btn btm-nav-sm rounded-md text-white bg-indigo-600"
+            color="violet.6"
+            size="md"
+            className="uppercase bg-violet-600"
             onClick={() => signIn("credentials")}
           >
             Masuk sebagai pekerja

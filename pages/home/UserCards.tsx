@@ -1,6 +1,17 @@
 import { fetcher } from "@/lib/fetcher";
-import { Image } from "@mantine/core";
+import {
+  Badge,
+  Button,
+  Divider,
+  Grid,
+  Group,
+  Image,
+  Select,
+  TextInput,
+  rem,
+} from "@mantine/core";
 import Link from "next/link";
+import { Search } from "lucide-react";
 import useSWR from "swr";
 
 export default function UserCards() {
@@ -15,6 +26,37 @@ export default function UserCards() {
 
   return (
     <>
+      <div className="shadow-xl border-2 p-2 rounded-md">
+        <Grid grow>
+          <Grid.Col lg={8}>
+            <TextInput
+              maw={rem(800)}
+              placeholder="Search for any skill"
+              variant="unstyled"
+              px={10}
+              rightSection={<Search className="text-slate-400 w-4 h-4" />}
+            />
+            <Divider orientation="vertical" />
+          </Grid.Col>
+          <Grid.Col lg={2}>
+            <Select
+              color="violet.6"
+              placeholder="Kategori"
+              data={[
+                {
+                  value: "dezz nuts",
+                  label: "Dezz Nuts",
+                },
+              ]}
+            />
+          </Grid.Col>
+          <Grid.Col lg={2}>
+            <Button className="bg-violet-600 w-full" color="violet.6">
+              Search
+            </Button>
+          </Grid.Col>
+        </Grid>
+      </div>
       {data.users.map((user: any) => (
         <div
           key={user.id}
@@ -32,7 +74,7 @@ export default function UserCards() {
                 },
               }}
             />
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-1">
               <h1 className="text-2xl font-bold">{user.name}</h1>
               {user.workerProfile?.currentJob ? (
                 <p className="text-sm text-slate-400">
@@ -65,19 +107,30 @@ export default function UserCards() {
                   {user.workerProfile?.province?.cities[0].name}
                 </p>
               ) : null}
-              <div className="flex flex-wrap lg:flex-wrap lg:max-w-md lg:justify-start gap-2 justify-center">
-                {/* {user.skills &&
-                  Object.values(user.skills).map((skill) => (
-                    <span className="badge badge-primary" key={skill}>
-                      {skill}
-                    </span>
-                  ))} */}
-              </div>
+              <Grid my="md" gutter="xs">
+                {user.skills
+                  ? user.skills
+                      .split(",")
+                      .slice(0, 3)
+                      .map((skill: string) => (
+                        <Grid.Col span="auto" key={skill}>
+                          <Badge
+                            fullWidth
+                            key={skill}
+                            radius="md"
+                            color="violet.8"
+                          >
+                            {skill}
+                          </Badge>
+                        </Grid.Col>
+                      ))
+                  : null}
+              </Grid>
             </div>
           </div>
           <div className="mt-5">
             <Link href={`/profile/${user?.id}`}>
-              <button className="btn-md flex-end rounded-md bg-violet-800 text-white btn">
+              <button className="btn-md flex-end rounded-md bg-violet-600 text-white btn">
                 Lihat Profile
               </button>
             </Link>

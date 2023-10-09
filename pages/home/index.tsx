@@ -5,7 +5,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <div className="bg-violet-800">
+      <div className="bg-violet-600">
         <div className="max-w-6xl mx-auto p-5">
           <h1 className="text-2xl -ml-2 text-white font-bold">Top Jobs</h1>
         </div>

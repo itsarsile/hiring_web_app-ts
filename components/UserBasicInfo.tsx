@@ -88,7 +88,7 @@ function UserBasicInfo({ user }: any) {
                 </Group>
               </Stack>
             </div>
-            <Button mt="lg" className="bg-violet-800">
+            <Button mt="lg" className="bg-violet-600">
               Hire
             </Button>
           </Stack>

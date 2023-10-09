@@ -179,6 +179,9 @@ function BasicInfoForm({ userId }: any) {
 
     },
   });
+
+  // ! TINGGAL BERAK DLU GAN
+
   useEffect(() => {
     if (userData) {
       form.setValues({
@@ -206,7 +209,7 @@ function BasicInfoForm({ userId }: any) {
           {...form.getInputProps("workPlace")}
         />
         <Textarea label="Bio" placeholder="Ceritakan tentang diri Anda..." {...form.getInputProps("bio")}/>
-        <Button type="submit" className="bg-indigo-600" color="indigo.6">Simpan</Button>
+        <Button type="submit" className="bg-violet-600" color="violet.6">Simpan</Button>
       </Stack>
     </form>
   );
@@ -254,7 +257,7 @@ function SkillInfoForm({ userId }: any) {
           />
         </Grid.Col>
         <Grid.Col span={1}>
-          <Button bg="blue" variant="outline" type="submit">
+          <Button color="violet.6" variant="outline" type="submit">
             Simpan
           </Button>
         </Grid.Col>
@@ -336,7 +339,7 @@ function WorkExperienceForm({ userId }: any) {
           {...form.getInputProps("description")}
         />
         <Divider />
-        <Button variant="outline" color="blue" type="submit">
+        <Button variant="outline" color="violet.6" type="submit">
           Simpan
         </Button>
       </Stack>
@@ -444,7 +447,7 @@ function PortfolioForm({ userId }: any) {
           </Dropzone>
           {previews}
           <Divider />
-          <Button variant="outline" type="submit">
+          <Button variant="outline" color="violet.6" type="submit">
             Tambah Portfolio
           </Button>
         </Stack>

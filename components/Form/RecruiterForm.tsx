@@ -71,7 +71,7 @@ function RecruiterForm() {
             label="Konfirmasi Password"
             withAsterisk
           />
-          <Button type="submit" className="bg-blue-500" variant="filled">
+          <Button type="submit" className="bg-amber-400" color="yellow.4">
             Register
           </Button>
         </Stack>

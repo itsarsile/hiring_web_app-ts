@@ -71,7 +71,7 @@ function WorkerForm() {
             label="Konfirmasi Password"
             withAsterisk
           />
-          <Button type="submit" className="bg-blue-500" variant="filled">
+          <Button type="submit" color="yellow.4" className="bg-amber-400">
             Register
           </Button>
         </Stack>
