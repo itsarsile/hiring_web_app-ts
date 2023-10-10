@@ -42,11 +42,6 @@ export default async function handler(
                 select: {
                   currentJob: true,
                   workPlace: true,
-                    province: {
-                        select: {
-                            cities: true,
-                        }
-                    }
                 }
             },
         }
