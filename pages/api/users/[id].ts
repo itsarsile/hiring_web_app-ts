@@ -48,16 +48,6 @@ router
             select: {
               workPlace: true,
               currentJob: true,
-              province: {
-                select: {
-                  name: true,
-                  cities: {
-                    select: {
-                      name: true,
-                    },
-                  },
-                },
-              },
             },
           },
           password: false,
