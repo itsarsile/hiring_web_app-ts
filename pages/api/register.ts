@@ -34,7 +34,7 @@ export default async function handler(
             password: hashedPassword,
             role: roles,
             photo: DEFAULT_PHOTO
-        }
+        },
     })
 
     res.status(201).json({ message: "User created successfully"});

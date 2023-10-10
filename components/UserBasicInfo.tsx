@@ -10,10 +10,12 @@ import {
   Group,
   Stack,
 } from "@mantine/core";
+import { useRouter } from "next/router";
 import { FiGithub, FiInstagram, FiMail } from "react-icons/fi";
 import { HiOutlineMapPin } from "react-icons/hi2";
 
 function UserBasicInfo({ user }: any) {
+  const router = useRouter()
   const userData = user?.user;
   const skillsArr = userData.skills ? userData.skills.split(",") : ["Not yet set"];
 
@@ -88,7 +90,7 @@ function UserBasicInfo({ user }: any) {
                 </Group>
               </Stack>
             </div>
-            <Button mt="lg" className="bg-violet-600">
+            <Button mt="lg" className="bg-violet-600" onClick={() => router.push(`/hire/${userData.id}`)}>
               Hire
             </Button>
           </Stack>

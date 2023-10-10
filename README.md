@@ -1,38 +1,157 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+<div align="center">
+  <img height="150" src="https://cdn.discordapp.com/attachments/1118733891738554480/1147830303457550416/Screenshot_120-removebg-preview.png" alt="Hiring App-logo" border="0"/>
+</div>
+  <h3 align="center">Hiring App</h3>
+  <p align="center">
+    <a href=https://github.com/itsarsile/hiring_web_app-ts.git"><strong>Explore the docs »</strong></a>
+    <br />
+    <a href="https://hirejob-fe-theta.vercel.app/">View Demo</a>
+    <br />
+    <a href="https://hirejob-be-ashy.vercel.app/">Api Demo</a>
+  </p>
+</p>
+
+<!-- TABLE OF CONTENTS -->
+
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Setup .env](#setup-env)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [Related Project](#related-project)
+- [Contact](#contact)
+
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+Peworld is a jobseeker website project that aims to assist Software Developers in finding jobs that match their skills.
+
+On this website, job seekers can create a profile, upload their experience and portfolio. Peworld also offers a feature to connect job seekers with companies that are looking for candidates with the required skills.
+
+One of the outstanding features of Peworld is the ability to identify the skills and interests of job seekers based on their abilities. With this information, recruiters can directly connect through the hire feature.
+
+<!-- GETTING STARTED -->
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+This is an example of how to list things you need to use the software and how to install them.
+
+- [NodeJs](https://nodejs.org/en/download/)
+- [Bootstrap Css](https://getbootstrap.com/)
+- [NextJS](https://nextjs.org/)
+- [Redux](https://redux.js.org/)
+
+### Installation
+
+- Clone This Front End Repo
+
+```
+git clone https://github.com/AnandaFPP/Hirejob-FE
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Go To Folder Repo
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+cd Hirejob-FE
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- Install Module
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Running Program
 
-## Learn More
+```
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Setup .env
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create .env.local file in your root project folder.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+NEXT_PUBLIC_API = [BACKEND_URL]
+```
 
-## Deploy on Vercel
+<!-- ROADMAP -->
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Screenshots
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<table>
+ <tr>
+    <td><img width="350px" src="/styles/assets/docs/recruiterregister.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="/styles/assets/docs/workerregister.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Recruiter Register</td>
+    <td>Worker Register</td>
+  </tr>
+  
+  <tr>
+    <td><img width="350px" src="/styles/assets/docs/landingpage.png"  border="0" border="0" alt="1" /></td>
+    <td> <img width="350px" src="/styles/assets/docs/home.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
+  </tr>
+   <tr>
+    <td>Landing Page</td>
+    <td>Job Seekers List</td>
+  </tr>
+
+   <tr>
+    <td><img width="350px" src="/styles/assets/docs/recruiterprofilepage.png"  border="0" border="0" alt="1" /></td>
+    <td><img width="350px" src="/styles/assets/docs/workerprofile.png"  border="0" border="0" alt="1" /></td>
+  </tr>
+   <tr>
+    <td>Recruiter Profile</td>
+    <td>Worker Profile</td>
+  </tr>
+
+  <tr>
+    <td><img width="350px" src="/styles/assets/docs/editworker.png"  border="0" border="0" alt="1" /></td>
+    <td><img width="350px" src="/styles/assets/docs/workerdetail.png"  border="0" border="0" alt="1" /></td>
+  </tr>
+   <tr>
+    <td>Edit Worker's Profile</td>
+    <td>Hire Profile</td>
+  </tr>
+
+  <tr>
+    <td><img width="350px" src="/styles/assets/docs/hiringpage.png"  border="0" border="0" alt="1" /></td>
+  </tr>
+   <tr>
+    <td>Hire Message</td>
+  </tr>
+
+</table>
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Related Project
+
+:rocket: [`Backend Hiring App`](https://github.com/AnandaFPP/Hirejob-BE)
+
+:rocket: [`Frontend Hiring App`](https://github.com/AnandaFPP/Hirejob-FE)
+
+:rocket: [`Demo Hiring App`](https://hirejob-fe-theta.vercel.app/)
+
+Project Link: [https://github.com/AnandaFPP/Hirejob-FE](https://github.com/AnandaFPP/Hirejob-FE)

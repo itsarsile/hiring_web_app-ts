@@ -9,33 +9,42 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     CredentialsProvider({
-      type: "credentials",
+      // The name to display on the sign in form (e.g. 'Sign in with...')
+      name: "Credentials",
+      // The credentials is used to generate a suitable form on the sign in page.
+      // You can specify whatever fields you are expecting to be submitted.
+      // e.g. domain, username, password, 2FA token, etc.
+      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        email: { label: "Email", type: "text" },
+        email: { label: "Email", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, request) {
+      //@ts-ignore
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials.password) {
-            return null;
-          }
-  
-          const user = await prisma.user.findUnique({
-            where: {
-              email: credentials.email,
-            },
-          });
-  
-          if (!user || !(await bcrypt.compare(credentials.password, user.password))) {
-            return null;
-          }
-  
-          return {
-            id: user.id,
-            email: user.email,
-            name: user.name,
-            photo: user.photo,
-            role: user.role,
-          };
+          return null;
+        }
+
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.email,
+          },
+        });
+
+        if (
+          !user ||
+          !(await bcrypt.compare(credentials.password, user.password))
+        ) {
+          return null;
+        }
+
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          photo: user.photo,
+          role: user.role,
+        };
       },
     }),
   ],
@@ -44,29 +53,29 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     session: ({ session, token }) => {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+          photo: token.photo,
+          role: token.role,
+        },
+      };
+    },
+    jwt: ({ token, user }) => {
+      console.log({ token, user });
+      if (user) {
+        const u = user as unknown as any;
         return {
-          ...session,
-          user: {
-            ...session.user,
-            id: token.id,
-            photo: token.photo,
-            role: token.role 
-          },
+          ...token,
+          id: u.id,
+          photo: u.photo,
+          role: u.role,
         };
-      },
-      jwt: ({ token, user }) => {
-        console.log({token, user})
-        if (user) {
-          const u = user as unknown as any;
-          return {
-            ...token,
-            id: u.id,
-            photo: u.photo,
-            role: u.role
-          };
-        }
-        return token;
-      },
+      }
+      return token;
+    },
   },
 };
 

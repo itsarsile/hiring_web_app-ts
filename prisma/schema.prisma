@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -16,6 +17,7 @@ model User {
   password         String
   bio              String?
   skills           String?
+  domicile         String?
   github           String?
   instagram        String?
   role             UserRoles
@@ -34,23 +36,6 @@ model RecruiterProfile {
   companyPhone   String?
   companySegment String?
   companyInfo    String?
-  province       Province? @relation(fields: [provinceId], references: [id])
-  provinceId     Int?
-}
-
-model Province {
-  id               Int                @id @default(autoincrement())
-  name             String
-  cities           City[]
-  RecruiterProfile RecruiterProfile[]
-  WorkerProfile    WorkerProfile[]
-}
-
-model City {
-  id         Int      @id @default(autoincrement())
-  name       String
-  province   Province @relation(fields: [provinceId], references: [id])
-  provinceId Int
 }
 
 model WorkerProfile {
@@ -58,8 +43,6 @@ model WorkerProfile {
   user       User      @relation(fields: [userId], references: [id])
   workPlace  String?
   currentJob String?
-  province   Province? @relation(fields: [provinceId], references: [id])
-  provinceId Int?
 }
 
 model Experience {

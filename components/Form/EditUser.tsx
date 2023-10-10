@@ -169,18 +169,29 @@ function DisplayWorkExperience({ userId }: any) {
 
 function BasicInfoForm({ userId }: any) {
   const { data } = useSWR(`/api/users/${userId}`, fetcher);
-  const userData = data && data?.user
+  const userData = data && data?.user;
   const form = useForm({
     initialValues: {
       name: "",
       currentJob: "",
+      domicile: "",
       workPlace: "",
       bio: "",
-
     },
   });
 
-  // ! TINGGAL BERAK DLU GAN
+  const onSubmit = form.onSubmit(async (values, _e) => {
+    try {
+      console.log(values)
+      const res = await axios.put(`/api/users/${userId}`, values)
+
+      if (res.status === 201 ) {
+        alert("Success submitting!")
+      }
+    } catch (error) {
+      alert("Error submitting");
+    }
+  });
 
   useEffect(() => {
     if (userData) {
@@ -189,51 +200,62 @@ function BasicInfoForm({ userId }: any) {
         currentJob: userData?.workerProfile?.currentJob,
         bio: userData.bio,
         workPlace: userData.workerProfile?.workPlace,
-      })
+      });
     }
   }, [data]);
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <Stack>
         <TextInput
           label="Nama Lengkap"
           placeholder="Masukkan nama lengkap..."
           {...form.getInputProps("name")}
         />
-        <TextInput label="Job Desk" placeholder="Masukkan job desk..." {...form.getInputProps("currentJob")}/>
-        <TextInput label="Domisili" placeholder="Masukkan domisili..."/>
+        <TextInput
+          label="Job Desk"
+          placeholder="Masukkan job desk..."
+          {...form.getInputProps("currentJob")}
+        />
+        <TextInput
+          label="Domisili"
+          placeholder="Masukkan domisili..."
+          {...form.getInputProps("domicile")}
+        />
         <TextInput
           label="Tempat Kerja"
           placeholder="Masukkan Tempat Kerja..."
           {...form.getInputProps("workPlace")}
         />
-        <Textarea label="Bio" placeholder="Ceritakan tentang diri Anda..." {...form.getInputProps("bio")}/>
-        <Button type="submit" className="bg-violet-600" color="violet.6">Simpan</Button>
+        <Textarea
+          label="Bio"
+          placeholder="Ceritakan tentang diri Anda..."
+          {...form.getInputProps("bio")}
+        />
+        <Button type="submit" className="bg-violet-600" color="violet.6">
+          Simpan
+        </Button>
       </Stack>
     </form>
   );
 }
 
-function SkillInfoForm({ userId }: any) { 
+function SkillInfoForm({ userId }: any) {
   const { data } = useSWR(`/api/skill/user/${userId}`, fetcher);
   const skillForm = useForm({
     initialValues: {
       skills: [],
     },
-    
   });
-
 
   useEffect(() => {
     if (data) {
-      const skillsArr = data[0].skills.split(", ");
+      const skillsArr = data.skills ? data[0].skills.split(", ") : []
       skillForm.setValues({
         skills: skillsArr,
-      })
+      });
     }
   }, [data]);
-
 
   const handleSubmit = skillForm.onSubmit(async (values) => {
     try {
@@ -267,12 +289,10 @@ function SkillInfoForm({ userId }: any) {
 }
 
 function WorkExperienceModal() {
-  const [opened, { open, close }] = useDisclosure(false)
+  const [opened, { open, close }] = useDisclosure(false);
   return (
-    <Modal opened={opened} onClose={close} title="Edit Work Experience">
-      
-    </Modal>
-  )
+    <Modal opened={opened} onClose={close} title="Edit Work Experience"></Modal>
+  );
 }
 
 function WorkExperienceForm({ userId }: any) {

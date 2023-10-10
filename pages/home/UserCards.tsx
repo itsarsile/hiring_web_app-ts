@@ -13,9 +13,10 @@ import {
 import Link from "next/link";
 import { Search } from "lucide-react";
 import useSWR from "swr";
+import { useState } from "react";
 
 export default function UserCards() {
-  const { data, error, isLoading } = useSWR("/api/users", fetcher);
+  const { data, error, isLoading } = useSWR(`/api/users`, fetcher);
   if (error) {
     return <p>Error: {error.message}</p>;
   }

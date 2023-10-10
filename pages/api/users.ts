@@ -11,7 +11,25 @@ export default async function handler(
   }
 
   try {
-    const users = await prisma.user.findMany({
+    const { skill } = req.query
+    console.log("🚀 ~ file: users.ts:15 ~ skill:", skill)
+    let users
+    
+    if (skill) {
+      users = await prisma.user.findMany({
+        where: {
+          skills: {
+            contains: skill as string
+          }
+        }
+      })
+
+      return res.status(200).json({ users: users });
+
+    }
+
+
+    users = await prisma.user.findMany({
         where: {
             role: 'WORKER',
         },
