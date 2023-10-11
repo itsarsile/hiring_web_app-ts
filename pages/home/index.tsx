@@ -14,7 +14,7 @@ export default function Home() {
         {/* Search Bar */}
 
         <div className="my-10">
-          <div className="flex flex-col rounded-lg shadow-xl">
+          <div className="flex flex-col ">
             {/* People Cards */}
             <UserCards />
           </div>

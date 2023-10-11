@@ -110,7 +110,7 @@ npx prisma migrate dev --name supabase
   </tr>
   
   <tr>
-    <td><img width="350px" src="/styles/assets/docs/landingpage.png"  border="0" border="0" alt="1" /></td>
+    <td><img width="350px" src="https://i.postimg.cc/Qtj0GYN8/image.png"  border="0" border="0" alt="1" /></td>
     <td> <img width="350px" src="/styles/assets/docs/home.png" \ border="0"  border="0"  border="0"  alt="2" /></td>
   </tr>
    <tr>

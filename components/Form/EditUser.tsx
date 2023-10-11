@@ -241,21 +241,18 @@ function BasicInfoForm({ userId }: any) {
 }
 
 function SkillInfoForm({ userId }: any) {
-  const { data } = useSWR(`/api/skill/user/${userId}`, fetcher);
-  const skillForm = useForm({
-    initialValues: {
-      skills: [],
-    },
-  });
+  const { data, isLoading } = useSWR(`/api/skill/user/${userId}`, fetcher);
+  
+    const skillForm = useForm({
+      initialValues: {
+        skills: data && data[0].skills?.split(", ") || [],
+      },
+    });
 
-  useEffect(() => {
-    if (data) {
-      const skillsArr = data.skills ? data[0].skills.split(", ") : []
-      skillForm.setValues({
-        skills: skillsArr,
-      });
-    }
-  }, [data]);
+  // const skillsArr = data.skills && data[0].skills.split(", ")
+ 
+  
+
 
   const handleSubmit = skillForm.onSubmit(async (values) => {
     try {
