@@ -4,7 +4,7 @@
 </div>
   <h3 align="center">Hiring App</h3>
   <p align="center">
-    <a href=https://github.com/itsarsile/hiring_web_app-ts.git"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/itsarsile/hiring_web_app-ts.git"><strong>Explore the docs »</strong></a>
     <br />
     <a href="https://hirejob-fe-theta.vercel.app/">View Demo</a>
     <br />
@@ -46,23 +46,23 @@ One of the outstanding features of Peworld is the ability to identify the skills
 
 This is an example of how to list things you need to use the software and how to install them.
 
-- [NodeJs](https://nodejs.org/en/download/)
-- [Bootstrap Css](https://getbootstrap.com/)
+- [Node.js](https://nodejs.org/en/download/)
+- [Tailwind CSS](https://tailwindcss.com/)
 - [NextJS](https://nextjs.org/)
-- [Redux](https://redux.js.org/)
+- [Supabase](https://supabase.com/)
 
 ### Installation
 
-- Clone This Front End Repo
+- Clone This Repo
 
 ```
-git clone https://github.com/AnandaFPP/Hirejob-FE
+git clone https://github.com/itsarsile/hiring_web_app-ts.git
 ```
 
 - Go To Folder Repo
 
 ```
-cd Hirejob-FE
+cd hiring_web-app-ts
 ```
 
 - Install Module
@@ -82,10 +82,20 @@ npm run dev
 Create .env.local file in your root project folder.
 
 ```
-NEXT_PUBLIC_API = [BACKEND_URL]
+DATABASE_URL=[YOUR SUPABASE CONNECTION STRING]
+NEXT_PUBLIC_SUPABASE_URL=[YOUR SUPABASE URL]
+NEXT_PUBLIC_SUPABASE_KEY=[YOUR SUPABASE ANON KEY]
+```
+
+### Generate & migrate the database with your own supabase
+```
+npx prisma generate
+npx prisma migrate dev --name supabase
 ```
 
 <!-- ROADMAP -->
+
+## Run with Postman 
 
 ## Screenshots
 
@@ -148,10 +158,4 @@ Contributions are what make the open source community such an amazing place to b
 
 ## Related Project
 
-:rocket: [`Backend Hiring App`](https://github.com/AnandaFPP/Hirejob-BE)
-
-:rocket: [`Frontend Hiring App`](https://github.com/AnandaFPP/Hirejob-FE)
-
-:rocket: [`Demo Hiring App`](https://hirejob-fe-theta.vercel.app/)
-
-Project Link: [https://github.com/AnandaFPP/Hirejob-FE](https://github.com/AnandaFPP/Hirejob-FE)
+Project Link: [https://github.com/itsarsile/hiring_web_app-ts.git](https://github.com/itsarsile/hiring_web_app-ts.git)
