@@ -21,23 +21,36 @@ export default async function handler(
     });
 
     if (existingUser) {
-        return res.status(400).json({ error: "User already exists" });
+      return res.status(400).json({ error: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await prisma.user.create({
-        data: {
-            name,
-            email,
-            phone,
-            password: hashedPassword,
-            role: roles,
-            photo: DEFAULT_PHOTO
-        },
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        phone,
+        password: hashedPassword,
+        role: roles,
+        photo: DEFAULT_PHOTO
+      },
     })
-
-    res.status(201).json({ message: "User created successfully"});
+    if (user.role === 'WORKER') {
+      await prisma.workerProfile.create({
+        data: {
+          userId: user.id,
+        }
+      })
+    }
+    if (user.role === 'RECRUITER') {
+      await prisma.workerProfile.create({
+        data: {
+          userId: user.id
+        }
+      })
+    }
+    res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.error("Error during registration:", error);
     res.status(500).json({ error: "An error occurred during registration" });

@@ -1,5 +1,4 @@
-import { Card, Container, Divider, Stack, Title } from "@mantine/core";
-import Image from "next/image";
+import { Card, Container, Divider, Image, Stack, Title } from "@mantine/core";
 
 function UserCatalogue({ user }: any) {
   const userData = user.user;
@@ -23,13 +22,13 @@ function UserCatalogue({ user }: any) {
   };
   const UserPortfolio = userData.portfolios.map((_p: any) => (
     <div key={_p.portfolio.id} className="flex flex-col justify-center items-center text-center gap-2">
-      <a href={_p.portfolio.link} target="_blank">
+      <a href={_p.portfolio.link} target="_blank" className="px-5">
         <Image
           src={_p.portfolio.photo}
-          width={220}
+          width={160}
           height={150}
           alt="p thumbnail"
-          className="rounded-md shadow-md object-cover aspect-video"
+          className="rounded-md shadow-md object-fill aspect-video"
         />
       </a>
       <div className="">

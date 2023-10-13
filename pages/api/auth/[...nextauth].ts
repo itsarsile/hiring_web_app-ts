@@ -25,6 +25,15 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        const res = await fetch('http://localhost:3000/api/login', {
+          method: "POST",
+          body: JSON.stringify({
+            email: credentials.email,
+            password: credentials.password
+          }),
+          headers: {"Content-Type": "application/json"}
+        })  
+        const data = await res.json()
         const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
@@ -39,12 +48,12 @@ export const authOptions: NextAuthOptions = {
         }
 
         return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          photo: user.photo,
-          role: user.role,
-        };
+            id: data.user.id,
+            email: data.user.email,
+            name: data.user.name,
+            photo: data.user.photo,
+            role: data.user.role
+        }
       },
     }),
   ],

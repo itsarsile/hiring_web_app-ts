@@ -50,7 +50,18 @@ router
     } catch (error) {
       console.error("Error during portfolio creation:", error);
     }
-  });
+  })
+  .put(async (req, res) => {
+    const {userId} = req.query
+    const {title, link, types, photo} = req.body 
+    try {
+      await prisma.portfolio.update({
+      })
+    } catch (error) {
+      
+    }
+  })
+;
 
 export default router.handler({
   onError: (err: any, req, res) => {

@@ -25,7 +25,7 @@ import { useEffect, useState } from "react";
 import { FiImage, FiUpload, FiX } from "react-icons/fi";
 import { supabase } from "@/lib/supabase";
 import axios from "axios";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { fetcher } from "@/lib/fetcher";
 import { useDisclosure } from "@mantine/hooks";
 
@@ -102,7 +102,6 @@ function EditUser({ user }: any) {
           <Container>
             <Stack>
               <p className="text-xl font-semibold">Portfolio</p>
-              <Divider />
               <PortfolioForm userId={userId} />
             </Stack>
           </Container>
@@ -184,7 +183,7 @@ function BasicInfoForm({ userId }: any) {
     try {
       console.log(values)
       const res = await axios.put(`/api/users/${userId}`, values)
-
+      mutate(`/api/users/${userId}`)
       if (res.status === 201 ) {
         alert("Success submitting!")
       }
@@ -198,11 +197,12 @@ function BasicInfoForm({ userId }: any) {
       form.setValues({
         name: userData.name,
         currentJob: userData?.workerProfile?.currentJob,
+        domicile: userData?.domicile,
         bio: userData.bio,
         workPlace: userData.workerProfile?.workPlace,
       });
     }
-  }, [data]);
+  }, [userData]);
 
   return (
     <form onSubmit={onSubmit}>
