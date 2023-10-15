@@ -28,6 +28,7 @@ export default async function handler(
     res.setHeader('Set-Cookie', `token=${accessToken}`)
     return res.json({ user: userWithoutPassword })
   } catch (error) {
-
+    console.error(error)
+    return res.json({ error })
   }
 }

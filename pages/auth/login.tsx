@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import LoginForm from "@/components/Form/Login";
-
+import heroImage from './bg-login.png'
 const LoginPage = () => {
   return (
     <>
@@ -9,7 +9,7 @@ const LoginPage = () => {
       <div className="hidden lg:block overflow-y-hidden h-min-screen">
         <div className="flex gap-5 relative">
           <div className="hero h-screen w-1/2" style={{
-            backgroundImage: "url('./bg-login.png)"
+            backgroundImage: `url(${heroImage.src})`
           }}>
             <div className="hero-overlay bg-indigo-900/60"></div>
             <Image

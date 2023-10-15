@@ -1,11 +1,10 @@
 import Image from "next/image";
-import { useState } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 import Register from "@/components/Form/Register";
+import heroImage from './bg-login.png'
 
 const RegisterPage = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter()
 
   return (
@@ -13,7 +12,9 @@ const RegisterPage = () => {
       {/* Desktop */}
       <div className="hidden lg:block overflow-y-hidden h-min-screen">
         <div className="flex gap-5 relative">
-          <div className="hidden lg:hero bg-hero-login-img h-screen lg:w-1/2">
+          <div className="hidden lg:hero h-screen lg:w-1/2" style={{
+            backgroundImage: `url(${heroImage.src})`
+          }}>
             <div className="hero-overlay bg-indigo-900/60"></div>
             <Image
               src="/logo.svg"

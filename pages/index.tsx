@@ -117,41 +117,41 @@ export default function Home() {
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>Python</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>C++</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>UI & UX</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>System Analyst</p>
                     </div>
                   </div>
                   <div className="flex flex-col space-y-3 lg:space-y-5">
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>JavaScript</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>Ruby</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>Rust</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>Go</p>
                     </div>
                     <div className="flex lg:space-x-5">
                       <AiFillCheckCircle className="text-amber-400 w-6 h-6" />
-                      <p>Java</p>
+                      <p>OCaml</p>
                     </div>
                   </div>
                 </div>

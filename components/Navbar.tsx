@@ -11,6 +11,7 @@ export default function Navbar() {
       router.push("/")
   }
   const { data: session, status } = useSession();
+  console.log("🚀 ~ file: Navbar.tsx:14 ~ Navbar ~ session:", session?.user.role)
   return (
     <div className="navbar">
       <div className="navbar-start">
@@ -79,6 +80,11 @@ export default function Navbar() {
                 <li>
                 <Link href={`/profile/${session?.user?.id}`}>Profile</Link>
                 <Link href={`/profile/edit/${session?.user?.id}`}>Edit Profile</Link>
+                {
+                  session?.user.role === 'RECRUITER' && (
+                    <Link href={`/company-profile/${session?.user.id}`}>Company Profile</Link>
+                  )
+                }
                 </li>
                 <li>
                 <button onClick={handleSignOut}>Logout</button>
